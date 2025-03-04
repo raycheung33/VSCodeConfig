@@ -153,15 +153,15 @@
     "prefix": "dcEnv",
     "body": [
       "const real = {",
-        "request: async () => {},",
+      "request: async () => {},",
       "};",
       "",
       "const unreal = {",
-        "request: async () => {},",
+      "request: async () => {},",
       "};",
       "",
       "const current = (isReal: Boolean) => {",
-        "return isReal ? real : unreal;",
+      "return isReal ? real : unreal;",
       "};",
       "",
       "export {real, unreal, current};"
@@ -220,6 +220,14 @@
       "  };",
       "",
       "  export default Flow;"
+    ]
+  },
+  "dcFlowMST": {
+    "prefix": "dcFlowMST",
+    "body": [
+      "$1: flow(function* $1() {",
+      "",
+      "}),"
     ]
   }
 }
