@@ -1,0 +1,225 @@
+{
+  "Console log": {
+    "prefix": "l",
+    "body": [
+      "console.log(`$1`)"
+    ]
+  },
+  "dcStore": {
+    "prefix": "dcStore",
+    "body": [
+      "import {Instance, types as tt} from 'mobx-state-tree';",
+      "",
+      "const Store = tt",
+      ".model('$1', {",
+      "id: tt.optional(tt.identifier, ''),",
+      "})",
+      "",
+      "export interface I${1} extends Instance<typeof Store> {};",
+      "export default Store;"
+    ]
+  },
+  "dcComponet": {
+    "prefix": "dcComponent",
+    "body": [
+      "import {View, Text} from 'react-native';",
+      "import React from 'react';",
+      "",
+      "type Style = {",
+      "color: string;",
+      "[x: string]: any;",
+      "};",
+      "",
+      "type Props = {",
+      "text: string;",
+      "style: Style;",
+      "[x: string]: any;",
+      "};",
+      "",
+      "const DCView: React.FC<Props> = props => {",
+      "const {text, style, ...rest} = props;",
+      "return (",
+      "<Text style={{...style}} {...rest}>",
+      "{text}",
+      "</Text>",
+      ");",
+      "};",
+      "",
+      "export default DCView;"
+    ]
+  },
+  "dcView": {
+    "prefix": "dcView",
+    "body": [
+      "import * as React from 'react';",
+      "import {View} from 'react-native';",
+      "import {useStore} from 'mobx-store-provider';",
+      "import {observer} from 'mobx-react-lite';",
+      "import {NativeStackScreenProps} from '@react-navigation/native-stack';",
+      "import DCText from '../../app/ui/DCText';",
+      "import RootStore, {IRootStore} from '../../app/root/Store';",
+      "import {RootStackParamList} from '../../app/root/RootStackParamList';",
+      "import {IStrStore} from '../../app/str/Store';",
+      "import {I$1Store} from './Store';",
+      "",
+      "const DCView = ({route, navigation}) => {",
+      "  const root: IRootStore = useStore(RootStore);",
+      "  const str: IStrStore = root.str;",
+      "  const self: I$1Store = root.navigation.storeFromRoute(route);",
+      "  const color = root.theme.non.color;",
+      "",
+      "  React.useLayoutEffect(() => {",
+      "    navigation.setOptions({",
+      "      headerTitle: str.t('$1View'),",
+      "      headerLargeTitle: false,",
+      "      headerStyle: {",
+      "        backgroundColor: color.bg,",
+      "      },",
+      "      headerTitleStyle: {",
+      "        color: color.primary,",
+      "      },",
+      "    });",
+      "  }, []);",
+      "",
+      "  return (",
+      "    <View>",
+      "      <DCText title={'Hello world'} style={{color: color.primary}} />",
+      "    </View>",
+      "  );",
+      "};",
+      "",
+      "export default observer(DCView);"
+    ]
+  },
+  "dcActions": {
+    "prefix": "dcActions",
+    "body": [
+      ".actions(self => ({",
+      "$1",
+      "}))"
+    ]
+  },
+  "dcViews": {
+    "prefix": "dcViews",
+    "body": [
+      ".views(self => ({",
+      "$1",
+      "}))"
+    ]
+  },
+  "dcFlow": {
+    "prefix": "dcRequest",
+    "body": [
+      "    afterAttach() {",
+      "      self.request();",
+      "    },",
+      "",
+      "    request: flow(function* request() {",
+      "      self.requestState = 'loading';",
+      "      const env = getEnv(self).$1;",
+      "      try {",
+      "        const response = yield env.request();",
+      "        self.updateStore(response);",
+      "        self.requestState = 'done';",
+      "      } catch (error) {",
+      "        const str = getRoot(self).str;",
+      "        self.errorMessage = ErrorMessage.map(str, error);",
+      "        self.requestState = 'error';",
+      "      }",
+      "    }),",
+      "",
+      "    updateStore(response) {",
+      "      const {$2} = response;",
+      "    },"
+    ]
+  },
+  "dcFlatList": {
+    "prefix": "dcFlatList",
+    "body": [
+      "  return (",
+      "      <FlatList",
+      "        data={self.items.slice()}",
+      "        renderItem={({item}) => <ItemView self={item} />}",
+      "        contentContainerStyle={{",
+      "          paddingTop: Style.gap,",
+      "          paddingBottom: Style.gap,",
+      "          gap: Style.gap,",
+      "        }}",
+      "      />",
+      "  );"
+    ]
+  },
+  "dcEnv": {
+    "prefix": "dcEnv",
+    "body": [
+      "const real = {",
+        "request: async () => {},",
+      "};",
+      "",
+      "const unreal = {",
+        "request: async () => {},",
+      "};",
+      "",
+      "const current = (isReal: Boolean) => {",
+        "return isReal ? real : unreal;",
+      "};",
+      "",
+      "export {real, unreal, current};"
+    ]
+  },
+  "dcViewObserver": {
+    "prefix": "dcViewObserver",
+    "body": [
+      "      const $1 = observer(() => (",
+      "      <View><DCText></DCText></View>",
+      "    ));"
+    ]
+  },
+  "dcSafeAreaInsets": {
+    "prefix": "dcSafeAreaInsets",
+    "body": [
+      "      import {useSafeAreaInsets} from 'react-native-safe-area-context';",
+      "    const safeAreaInsets = useSafeAreaInsets();",
+    ]
+  },
+  "dcArrayMap": {
+    "prefix": "dcArrayMap",
+    "body": [
+      "Array.from({length: $1}).map((_, i) => ({id: `Id${i}`}))"
+    ]
+  },
+  "dcVolatile": {
+    "prefix": "dcVolatile",
+    "body": [
+      "    .volatile(_ => ({",
+      "      callback$1: () => {},",
+      "    }))",
+      "    .actions(self => ({",
+      "      updateCallback$1(callback$1) {",
+      "        self.callback$1 = callback$1;",
+      "      },",
+      "    }))"
+    ]
+  },
+  "dcFlowjs": {
+    "prefix": "dcFlowNavigationStack",
+    "body": [
+      "  import Stack from '../../app/main/Stack';",
+      "  import View from './View';",
+      "",
+      "  const Flow = ({route, navigation}) => {",
+      "    return (",
+      "      <Stack.Navigator>",
+      "        <Stack.Screen",
+      "          name={'View'}",
+      "          component={View}",
+      "          initialParams={{...route.params}}",
+      "        />",
+      "      </Stack.Navigator>",
+      "    );",
+      "  };",
+      "",
+      "  export default Flow;"
+    ]
+  }
+}

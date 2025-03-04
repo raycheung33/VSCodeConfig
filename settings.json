@@ -1,0 +1,53 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorCustomizations": {
+    "[Atom One Dark]": {
+      "editorCursor.foreground": "#00ffff",
+      "editor.wordHighlightBackground": "#ff00ff11",
+      "editor.wordHighlightTextBackground": "#ff00ff11",
+      "statusBar.background": "#333333",
+      "statusBar.debuggingBackground": "#222222"
+    }
+  },
+  "editor.tokenColorCustomizations": {
+    "[Atom One Dark]": {
+      "variables": "#cc99cc",
+      "keywords": "#9999cc",
+      "numbers": "#eeeeee"
+    }
+  },
+  "jupyter.interactiveWindow.textEditor.executeSelection": true,
+  "[python]": {
+    "editor.formatOnSave": true
+  },
+  "explorer.confirmDragAndDrop": false,
+  "react-native-tools.showUserTips": false,
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "[typescript]": {
+    // for .ts files
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[typescriptreact]": {
+    // for .tsx files
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "editor.codeActionsOnSave": {
+    // apply ESLint
+    "source.fixAll": "explicit"
+  },
+  "workbench.colorTheme": "Atom One Dark",
+  "workbench.productIconTheme": "macos-modern",
+  "security.workspace.trust.untrustedFiles": "open"
+}
